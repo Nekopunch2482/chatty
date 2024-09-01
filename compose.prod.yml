@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+  frontend:
+    image: chatty-i
+    container_name: chatty-c
+    build:
+      context: "./"
+      dockerfile: ./Dockerfile
+    ports:
+      - 80:80
