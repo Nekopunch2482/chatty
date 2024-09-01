@@ -4,14 +4,14 @@ HOST=147.45.102.230
 REPO_NAME=chatty
 
 if [[ $1 = "up" ]]; then
-    ssh $USER@$HOST docker compose -f $REPO_NAME/compose.prod.yml up -d --build --force-recreate
+    ssh -t $USER@$HOST docker compose -f $REPO_NAME/compose.prod.yml up -d --build --force-recreate
 elif [[ $1 = "down" ]]; then
-    ssh $USER@$HOST docker compose -f $REPO_NAME/compose.prod.yml down
+    ssh -t $USER@$HOST docker compose -f $REPO_NAME/compose.prod.yml down
 elif [[ $1 = "deploy" ]]; then
-    ssh $USER@$HOST "cd $REPO_NAME && git pull"
-    ssh $USER@$HOST docker compose -f $REPO_NAME/compose.prod.yml up -d --build --force-recreate
+    ssh -t $USER@$HOST "cd $REPO_NAME && git pull"
+    ssh -t $USER@$HOST docker compose -f $REPO_NAME/compose.prod.yml up -d --build --force-recreate
 elif [[ $1 = "status" ]]; then
-    ssh $USER@$HOST docker compose -f $REPO_NAME/compose.prod.yml ps
+    ssh -t $USER@$HOST docker compose -f $REPO_NAME/compose.prod.yml ps
 else
     echo "wrong arguments, try: 'up' 'down' 'deploy' 'status'"
 fi
